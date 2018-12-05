@@ -8,6 +8,9 @@ require('dotenv').config();
 // mongodb config
 require('./config/db');
 
+// Router
+const contact = require('./src/routes/contact');
+
 // Initializing express app
 const app = express();
 
@@ -30,9 +33,6 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 // Using CORS
 app.use(cors());
 
-// Rate Limit for API
-app.enable('trust proxy');  // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc
-
 const limiter = new RateLimit({
   windowMs: 60 * 1000, // 1 minutes
   max: 50, // limit each IP to 100 requests per windowMs
@@ -50,5 +50,7 @@ app.get('/', (req, res) => {
     msg: 'Welcome to Contacts App API'
   });
 });
+
+app.use('/contact', contact);
 
 module.exports = app;

@@ -11,11 +11,19 @@ const ContactSchema = new Schema({
     type: String
   },
   phone: {
-    dialCode: String,
-    number: Number,
-    required: true
+    dialCode: {
+      type: String,
+      required: true
+    },
+    number: {
+      type: Number,
+      required: true
+    }
   },
-  lastUpdateAt: { type: Date, default: Date.now }
+  lastUpdateAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 ContactSchema.post('save', () => {
