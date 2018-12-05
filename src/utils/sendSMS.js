@@ -1,22 +1,17 @@
-const twilioClient = require('twilio');
+const msg91 = require('msg91-promise');
 
-// twilio configurations
-const accountSid = process.env.TWILIO_ID;
-const authToken = process.env.TWILIO_TOKEN;
-const twilio = twilioClient(accountSid, authToken);
-const sender = process.env.TWILIO_NUMBER;
+// msg91 configurations
+const msg91Key = process.env.MSG91_APIKEY;
+const msg91Id = process.env.MSG91_ID;
+const route = 4; // transactional route
+const msg91SMS = msg91(msg91Key, msg91Id, route);
 
-const sendViaTwilio = async (number, content) => {
+const send = async (number, content) => {
   try {
-    await twilio.messages
-      .create({
-        body: content,
-        to: number,
-        from: sender
-      });
+    await msg91SMS.send(number, content);
   } catch (error) {
     throw error;
   }
 };
 
-module.exports = sendViaTwilio;
+module.exports = { send };

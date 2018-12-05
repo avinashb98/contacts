@@ -1,4 +1,5 @@
 const Contact = require('../models/contacts');
+const SmsService = require('../utils/sendSMS');
 
 const getAll = async (req, res) => {
   let contacts;
@@ -28,7 +29,7 @@ const create = async (req, res) => {
     lastName,
     dialCode,
     number
-  } = req.body;
+  } = req.parsed;
 
   const newContact = {
     firstName,
@@ -57,7 +58,33 @@ const create = async (req, res) => {
   });
 };
 
+const sendSMS = async (req, res) => {
+  const {
+    message,
+    phone
+  } = req.parsed;
+
+  try {
+    await SmsService.send(phone, message);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      msg: 'Internal Server Error',
+      data: {}
+    });
+    return;
+  }
+
+  res.status(200).json({
+    success: true,
+    msg: 'SMS Successfully Sent',
+    data: {}
+  });
+};
+
 module.exports = {
   getAll,
-  create
+  create,
+  sendSMS
 };

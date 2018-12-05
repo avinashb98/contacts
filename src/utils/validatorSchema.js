@@ -7,6 +7,13 @@ const ValidateCreateContact = Joi.object().keys({
   number: Joi.number().required()
 });
 
+const ValidateSendSMS = Joi.object().keys({
+  message: Joi.string().min(2).max(100).required(),
+  phone: Joi.string().min(5).required()
+});
+
+
 module.exports = {
-  ValidateCreateContact
+  ValidateCreateContact,
+  ValidateSendSMS
 };
