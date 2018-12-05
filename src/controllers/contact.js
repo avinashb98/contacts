@@ -14,11 +14,23 @@ const getAll = async (req, res) => {
     return;
   }
 
+  const filteredContacts = [];
+
+  contacts.forEach((contact) => {
+    const data = {
+      phone: `+${contact.phone.dialCode}${contact.phone.number}`,
+      id: contact._id,
+      firstName: contact.firstName,
+      lastName: contact.lastName
+    };
+    filteredContacts.push(data);
+  });
+
   res.status(200).json({
     success: true,
     msg: 'List of Contacts',
     data: {
-      contacts
+      contacts: filteredContacts
     }
   });
 };
