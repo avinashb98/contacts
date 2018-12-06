@@ -21,6 +21,16 @@ export class ContactService {
     );
   }
 
+  getContact(id): Observable<IContact> {
+    const body = { id: id };
+    console.log(body);
+    return this.http.post<IContact>(this.contactUrl, body)
+    .pipe(
+      tap(data => console.log(data)),
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {

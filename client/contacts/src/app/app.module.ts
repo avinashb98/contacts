@@ -18,8 +18,9 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'contacts', component: ContactListComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+      { path: 'contacts/:id', component: ContactDetailComponent },
+      { path: '', redirectTo: 'contacts', pathMatch: 'full' },
+      { path: '**', redirectTo: 'contacts', pathMatch: 'full' }
     ])
   ],
   providers: [],
