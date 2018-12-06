@@ -16,13 +16,15 @@
           <div class='col-md-8'>{{contact.lastName}}</div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>Description:</div>
-          <div class='col-md-8'>{{contact.description}}</div>
-        </div>
-        <div class='row'>
           <div class='col-md-4'>Phone Number:</div>
           <div class='col-md-8'>{{contact.phone}}</div>
         </div>
+      </div>
+    </div>
+    <div class="input-group input-group-lg">
+      <input type="text" [(ngModel)]="message" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+      <div class="input-group-append">
+        <span (click)="sendSMS()" class="input-group-text" id="inputGroup-sizing-lg">Send SMS</span>
       </div>
     </div>
   </div>

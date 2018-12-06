@@ -12,6 +12,7 @@ export class ContactDetailComponent implements OnInit {
   pageTitle = 'Contact Detail';
   errorMessage = '';
   contact: IContact | undefined;
+  message: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -24,6 +25,7 @@ export class ContactDetailComponent implements OnInit {
       const id = param;
       console.log(id);
       this.getContact(id);
+      this.message = `Your OTP is ${this.generateOTP()}`;
     }
   }
 
@@ -31,6 +33,16 @@ export class ContactDetailComponent implements OnInit {
     this.contactService.getContact(id).subscribe(
       (body: any) => this.contact = body.data.contact,
       error => this.errorMessage = <any>error);
+  }
+
+
+  generateOTP = () => {
+    const OTPlength = 6;
+    let OTP = '';
+    for (let i = 0; i < OTPlength; i += 1) {
+      OTP += `${Math.floor(Math.random() * 10)}`;
+    }
+    return OTP;
   }
 
   onBack(): void {
