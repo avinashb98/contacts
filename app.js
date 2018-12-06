@@ -45,12 +45,12 @@ app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Router Initialization
-app.get('/', (req, res) => {
+app.get('/api/', (req, res) => {
   res.status(200).json({
     msg: 'Welcome to Contacts App API'
   });
 });
 
-app.use('/contact', contact);
+app.use('/api/contact', contact);
 
 module.exports = app;
