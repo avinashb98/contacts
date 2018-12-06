@@ -27,6 +27,16 @@
         <span (click)="sendSMS()" class="input-group-text" id="inputGroup-sizing-lg">Send SMS</span>
       </div>
     </div>
+    <div *ngIf="status==='sending'" class="alert alert-warning" role="alert">
+        Sending Message...
+    </div>
+    <div *ngIf="status==='sent'" class="alert alert-primary" role="alert">
+        Message Sent!
+    </div>
+    <div *ngIf="status==='error'" class="alert alert-danger" role="alert">
+        Error in sending message.
+    </div>
+
   </div>
 
   <div class='card-footer'>

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { IContact } from '../contact-list/contact';
 import { ContactService } from '../contact-list/contact.service';
+import { MessageService } from '../message.service';
 
 @Component({
   templateUrl: './contact-detail.component.html',
@@ -13,10 +14,12 @@ export class ContactDetailComponent implements OnInit {
   errorMessage = '';
   contact: IContact | undefined;
   message: string;
+  status = 'idle';
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private contactService: ContactService) {
+    private contactService: ContactService,
+    private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -27,6 +30,21 @@ export class ContactDetailComponent implements OnInit {
       this.getContact(id);
       this.message = `Your OTP is ${this.generateOTP()}`;
     }
+  }
+
+  sendSMS() {
+    this.status = 'sending';
+    // this.messageService.sendSMS(this.contact.phone, this.message)
+    this.messageService.sendSMS('+918527510313', this.message)
+    .subscribe(
+      (body: any) => {
+        this.status = 'sent';
+      },
+      error => {
+        this.errorMessage = <any>error;
+        this.status = 'error';
+      }
+    );
   }
 
   getContact(id: string) {
