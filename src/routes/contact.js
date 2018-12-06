@@ -7,5 +7,6 @@ const router = express.Router();
 router.get('/all', contact.getAll);
 router.post('/create', validate.createContact, contact.create);
 router.post('/send', validate.sendSMS, contact.sendSMS);
+router.get('/messages', contact.getMessages);
 
 module.exports = router;

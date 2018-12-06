@@ -1,4 +1,5 @@
 const Contact = require('../models/contacts');
+const Message = require('../models/messages');
 const SmsService = require('../utils/sendSMS');
 
 const getAll = async (req, res) => {
@@ -93,10 +94,58 @@ const sendSMS = async (req, res) => {
     msg: 'SMS Successfully Sent',
     data: {}
   });
+
+  const newMessage = {
+    recipient: phone,
+    message
+  };
+
+  try {
+    await Message.create(newMessage);
+    console.log('Message Successfully stored');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getMessages = async (req, res) => {
+  let messages;
+
+  try {
+    messages = await Message.find();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      msg: 'Internal Server Error',
+      data: {}
+    });
+  }
+
+  const filteredMessages = [];
+
+  messages.forEach((message) => {
+    const { message: content, recipient } = message;
+    const filtered = {
+      recipient,
+      message: content,
+      sentAt: message.lastUpdateAt
+    };
+    filteredMessages.push(filtered);
+  });
+
+  res.status(200).json({
+    success: true,
+    msg: 'List of messages',
+    data: {
+      messages: filteredMessages
+    }
+  });
 };
 
 module.exports = {
   getAll,
   create,
-  sendSMS
+  sendSMS,
+  getMessages
 };
