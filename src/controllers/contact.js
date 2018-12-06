@@ -19,7 +19,7 @@ const getAll = async (req, res) => {
 
   contacts.forEach((contact) => {
     const data = {
-      phone: `+${contact.phone.dialCode}${contact.phone.number}`,
+      phone: `${contact.phone.dialCode}${contact.phone.number}`,
       id: contact._id,
       firstName: contact.firstName,
       lastName: contact.lastName
