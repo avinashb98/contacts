@@ -36,6 +36,43 @@ const getAll = async (req, res) => {
   });
 };
 
+const getContact = async (req, res) => {
+  const { id } = req.parsed;
+  let contact;
+  try {
+    contact = await Contact.findById(id);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      msg: 'Internal Server Error',
+      data: {}
+    });
+    return;
+  }
+
+  if (!contact) {
+    res.status(404).json({
+      success: false,
+      msg: 'Contact Not Found',
+      data: {}
+    });
+    return;
+  }
+
+  res.status(200).json({
+    success: true,
+    msg: 'Contact Details',
+    data: {
+      contact: {
+        phone: `${contact.phone.dialCode}${contact.phone.number}`,
+        id: contact._id,
+        firstName: contact.firstName,
+        lastName: contact.lastName
+      }
+    }
+  });
+};
+
 const create = async (req, res) => {
   const {
     firstName,
@@ -147,5 +184,6 @@ module.exports = {
   getAll,
   create,
   sendSMS,
-  getMessages
+  getMessages,
+  getContact
 };
