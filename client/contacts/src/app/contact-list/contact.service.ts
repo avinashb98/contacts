@@ -9,7 +9,7 @@ import { IContact } from './contact';
   providedIn: 'root'
 })
 export class ContactService {
-  private contactUrl = 'http://localhost:3000/api/contact/';
+  private contactUrl = 'https://hidden-tundra-66710.herokuapp.com/api/contact/';
 
   constructor(private http: HttpClient) { }
 

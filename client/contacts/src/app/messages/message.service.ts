@@ -9,7 +9,7 @@ import { IMessage } from './message';
   providedIn: 'root'
 })
 export class MessageService {
-  private MessageUrl = 'http://localhost:3000/api/contact/messages';
+  private MessageUrl = 'https://hidden-tundra-66710.herokuapp.com/api/contact/messages';
 
   constructor(private http: HttpClient) { }
 
