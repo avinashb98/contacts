@@ -3,28 +3,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { IContact } from './contact';
+import { IMessage } from './message';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContactService {
-  private contactUrl = 'http://localhost:3000/api/contact/';
+export class MessageService {
+  private MessageUrl = 'http://localhost:3000/api/contact/messages';
 
   constructor(private http: HttpClient) { }
 
-  getContacts(): Observable<IContact[]> {
-    return this.http.get<IContact[]>(this.contactUrl + 'all')
-    .pipe(
-      tap(data => console.log(data)),
-      catchError(this.handleError)
-    );
-  }
-
-  getContact(id): Observable<IContact> {
-    const body = { id: id };
-    console.log(body);
-    return this.http.post<IContact>(this.contactUrl, body)
+  getMessages(): Observable<IMessage[]> {
+    return this.http.get<IMessage[]>(this.MessageUrl)
     .pipe(
       catchError(this.handleError)
     );

@@ -10,7 +10,7 @@ import { ContactService } from './contact.service';
 export class ContactListComponent implements OnInit {
   pageTitle = 'Contact List';
   contacts: IContact[] = [];
-  errormessage = '';
+  errorMessage = '';
 
   constructor(private contactService: ContactService) {
 
@@ -21,7 +21,7 @@ export class ContactListComponent implements OnInit {
       (body: any) => {
         this.contacts = body.data.contacts;
       },
-      error => this.errormessage = <any>error
+      error => this.errorMessage = <any>error
     );
   }
 }
