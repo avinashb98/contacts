@@ -3,6 +3,7 @@
     {{pageTitle}}
   </div>
   <div class='card-body'>
+    <img *ngIf='!(messages && messages.length)' src="assets/Loading_icon.gif" alt="">
     <div class='table-responsive'>
       <table class='table'
              *ngIf='messages && messages.length'>
