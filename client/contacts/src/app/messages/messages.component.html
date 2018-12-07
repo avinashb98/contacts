@@ -1,17 +1,23 @@
 <div class='card'>
   <div class='card-header'>
-    {{pageTitle}}
+    <h3>{{pageTitle}}</h3>
   </div>
   <div class='card-body'>
-    <div *ngIf='messages && messages.length' class="gaadiex-list">
-        <div *ngFor='let message of messages' class="gaadiex-list-item"><img class="gaadiex-list-item-img" src="assets/message.png" alt="List user">
-          <div class="gaadiex-list-item-text">
-            <h3><a [routerLink]="['/messages']">{{ message.recipient}}</a></h3>
-            <h4> {{ message.message }} </h4>
-            <p> {{ message.sentAt }}</p>
+    <ul *ngIf='messages && messages.length' class="list-group list-group-flush">
+      <li *ngFor='let message of messages' class="list-group-item">
+        <div class="row">
+          <div class="col-sm">
+            <h5> <strong>To:</strong>  {{ message.recipient}}</h5>
+          </div>
+          <div class="col-sm">
+            <h5><strong>Text:</strong> {{ message.message }} </h5>
+          </div>
+          <div class="col-sm">
+            <h5><strong>Sent at:</strong> {{ message.sentAt }}</h5>
           </div>
         </div>
-      </div>
+      </li>
+    </ul>
     <img *ngIf='!(messages && messages.length)' src="assets/Loading_icon.gif" alt="">
   </div>
 </div>

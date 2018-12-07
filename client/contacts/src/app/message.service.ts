@@ -7,7 +7,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MessageService {
-  private baseUrl = 'http://localhost:3000/api/contact/';
+  private baseUrl = 'https://hidden-tundra-66710.herokuapp.com/api/contact/';
   constructor(private http: HttpClient) { }
 
   sendSMS(phone, message): Observable<any> {

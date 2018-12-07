@@ -1,17 +1,27 @@
 <div class='card'>
   <div class='card-header'>
-    {{pageTitle}}
+    <h2>{{pageTitle}}</h2>
   </div>
   <div class='card-body'>
-    <div *ngIf='contacts && contacts.length' class="gaadiex-list">
-      <div *ngFor='let contact of contacts' class="gaadiex-list-item"><img class="gaadiex-list-item-img" src="assets/profile.png" alt="List user">
-        <div class="gaadiex-list-item-text">
-          <h3><a [routerLink]="['/contacts', contact.id]">{{ contact.firstName + ' ' + contact.lastName}}</a></h3>
-          <h4>{{ contact.phone }}</h4>
-          <p> I'll be in your neighborhood doing errands</p>
-        </div>
-      </div>
-    </div>
+      <ul *ngIf='contacts && contacts.length' class="list-group list-group-flush">
+        <li *ngFor='let contact of contacts' class="list-group-item">
+          <div class="row">
+            <div class="col-sm-2">
+              <img class="profile-pic" src="assets/profile.png" alt="">
+            </div>
+            <div class="col-sm-5">
+              <h5>
+                <a [routerLink]="['/contacts', contact.id]">
+                  {{ contact.firstName + ' ' + contact.lastName}}
+                </a>
+              </h5>
+            </div>
+            <div class="col-sm-5">
+              <h5>{{ contact.phone }} </h5>
+            </div>
+          </div>
+        </li>
+      </ul>
     <img *ngIf='!(contacts && contacts.length)' src="assets/Loading_icon.gif" alt="">
   </div>
 </div>

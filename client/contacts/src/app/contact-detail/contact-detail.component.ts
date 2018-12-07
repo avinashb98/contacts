@@ -35,7 +35,7 @@ export class ContactDetailComponent implements OnInit {
   sendSMS() {
     this.status = 'sending';
     // this.messageService.sendSMS(this.contact.phone, this.message)
-    this.messageService.sendSMS('+918527510313', this.message)
+    this.messageService.sendSMS('+919971792703', this.message)
     .subscribe(
       (body: any) => {
         this.status = 'sent';
