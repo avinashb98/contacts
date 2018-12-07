@@ -3,26 +3,16 @@
     {{pageTitle}}
   </div>
   <div class='card-body'>
+    <div *ngIf='messages && messages.length' class="gaadiex-list">
+        <div *ngFor='let message of messages' class="gaadiex-list-item"><img class="gaadiex-list-item-img" src="assets/message.png" alt="List user">
+          <div class="gaadiex-list-item-text">
+            <h3><a [routerLink]="['/messages']">{{ message.recipient}}</a></h3>
+            <h4> {{ message.message }} </h4>
+            <p> {{ message.sentAt }}</p>
+          </div>
+        </div>
+      </div>
     <img *ngIf='!(messages && messages.length)' src="assets/Loading_icon.gif" alt="">
-    <div class='table-responsive'>
-      <table class='table'
-             *ngIf='messages && messages.length'>
-        <thead>
-          <tr>
-            <th>Recipient</th>
-            <th>Message</th>
-            <th>Sent At</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let message of messages'>
-            <td>{{ message.recipient }}</td>
-            <td>{{ message.message}}</td>
-            <td>{{ message.sentAt }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </div>
 <div *ngIf='errorMessage'

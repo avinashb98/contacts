@@ -16,10 +16,21 @@ export class MessagesComponent implements OnInit {
 
   }
 
+  convertDate(message: any) {
+    const [ day, time ] = message.sentAt.split('T');
+    const formattedTime = time.split(':').slice(0, 2).join(':');
+    message.sentAt = `${formattedTime} ${day}`;
+    return message;
+  }
+
   ngOnInit(): void {
     this.messageService.getMessages().subscribe(
       (body: any) => {
-        this.messages = body.data.messages;
+        this.messages = body.data.messages
+                          .reverse()
+                          .map((message) => {
+                            return this.convertDate(message);
+                          });
       },
       error => this.errorMessage = <any>error
     );

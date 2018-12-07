@@ -3,30 +3,16 @@
     {{pageTitle}}
   </div>
   <div class='card-body'>
-    <div class='table-responsive'>
-    <img *ngIf='!(contacts && contacts.length)' src="assets/Loading_icon.gif" alt="">
-      <table class='table'
-             *ngIf='contacts && contacts.length'>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>LastName</th>
-            <th>Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let contact of contacts'>
-            <td>  
-              <a [routerLink]="['/contacts', contact.id]">
-                {{ contact.firstName }}
-              </a>
-            </td>
-            <td>{{ contact.lastName}}</td>
-            <td>{{ contact.phone }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div *ngIf='contacts && contacts.length' class="gaadiex-list">
+      <div *ngFor='let contact of contacts' class="gaadiex-list-item"><img class="gaadiex-list-item-img" src="assets/profile.png" alt="List user">
+        <div class="gaadiex-list-item-text">
+          <h3><a [routerLink]="['/contacts', contact.id]">{{ contact.firstName + ' ' + contact.lastName}}</a></h3>
+          <h4>{{ contact.phone }}</h4>
+          <p> I'll be in your neighborhood doing errands</p>
+        </div>
+      </div>
     </div>
+    <img *ngIf='!(contacts && contacts.length)' src="assets/Loading_icon.gif" alt="">
   </div>
 </div>
 <div *ngIf='errorMessage'
