@@ -45,12 +45,6 @@ app.use(limiter);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(express.static(path.join(__dirname, './dist/')));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './dist/index.html'));
-});
-
 // Router Initialization
 app.get('/api/', (req, res) => {
   res.status(200).json({
